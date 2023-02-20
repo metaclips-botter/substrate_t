@@ -35,16 +35,16 @@ rand = { version = "0.8", optional = true, default-features = false }
 rand_pcg = { version = "0.3", optional = true }
 
 # Substrate Dependencies
-frame-benchmarking = { version = "4.0.0-dev", default-features = false, path = "../benchmarking", optional = true }
-frame-support = { version = "4.0.0-dev", default-features = false, path = "../support" }
-frame-system = { version = "4.0.0-dev", default-features = false, path = "../system" }
+frame-benchmarking = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false, optional = true }
+frame-support = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false }
+frame-system = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false }
 pallet-contracts-primitives = { version = "7.0.0", default-features = false, path = "primitives" }
 pallet-contracts-proc-macro = { version = "4.0.0-dev", path = "proc-macro" }
-sp-api = { version = "4.0.0-dev", default-features = false, path = "../../primitives/api" }
-sp-core = { version = "7.0.0", default-features = false, path = "../../primitives/core" }
-sp-io = { version = "7.0.0", default-features = false, path = "../../primitives/io" }
-sp-runtime = { version = "7.0.0", default-features = false, path = "../../primitives/runtime" }
-sp-std = { version = "5.0.0", default-features = false, path = "../../primitives/std" }
+sp-api = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false }
+sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false }
+sp-io = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false }
+sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false }
+sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false }
 
 [dev-dependencies]
 array-bytes = "4.1"
@@ -54,11 +54,11 @@ pretty_assertions = "1"
 wat = "1"
 
 # Substrate Dependencies
-pallet-balances = { version = "4.0.0-dev", path = "../balances" }
-pallet-timestamp = { version = "4.0.0-dev", path = "../timestamp" }
-pallet-insecure-randomness-collective-flip = { version = "4.0.0-dev", path = "../insecure-randomness-collective-flip" }
-pallet-utility = { version = "4.0.0-dev", path = "../utility" }
-sp-keystore = { version = "0.13.0", path = "../../primitives/keystore" }
+pallet-balances = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false }
+pallet-timestamp = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false }
+pallet-randomness-collective-flip = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false }
+pallet-utility = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false }
+sp-keystore = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.37", default-features = false }
 
 [features]
 default = ["std"]

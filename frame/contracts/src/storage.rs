@@ -255,13 +255,46 @@ impl<T: Config> Storage<T> {
 
 		// `weight_per_key` being zero makes no sense and would constitute a failure to
 		// benchmark properly. We opt for not removing any keys at all in this case.
-		let key_budget = weight_limit
-			.saturating_sub(base_weight)
-			.saturating_sub(decoding_weight)
-			.checked_div_per_component(&weight_per_key)
-			.unwrap_or(0) as u32;
+		let key_budget = weight_limit.saturating_sub(base_weight).saturating_sub(decoding_weight);
+		let key_budget =
+			Self::checked_div_per_component(&key_budget, &weight_per_key).unwrap_or(0) as u32;
 
 		(weight_per_key, key_budget)
+	}
+
+	/// NOTE: this function was copy/pasted from the latest `substrate` master branch.
+	///
+	/// Calculates how many `second` fit into `first`.
+	///
+	/// Divides each component of `first` against the same component of `second`. Returns the
+	/// minimum of all those divisions. Returns `None` in case **all** components of `second` are
+	/// zero.
+	///
+	/// This returns `Some` even if some components of `second` are zero as long as there is at
+	/// least one non-zero component in `second`. The devision for this particular component will
+	/// then yield the maximum value (e.g u64::MAX). This is because we assume not every operation
+	/// and hence each `Weight` will necessarily use each resource.
+	const fn checked_div_per_component(first: &Weight, second: &Weight) -> Option<u64> {
+		let mut all_zero = true;
+		let ref_time = match first.ref_time().checked_div(second.ref_time()) {
+			Some(ref_time) => {
+				all_zero = false;
+				ref_time
+			},
+			None => u64::MAX,
+		};
+		let proof_size = match first.proof_size().checked_div(second.proof_size()) {
+			Some(proof_size) => {
+				all_zero = false;
+				proof_size
+			},
+			None => u64::MAX,
+		};
+		if all_zero {
+			None
+		} else {
+			Some(if ref_time < proof_size { ref_time } else { proof_size })
+		}
 	}
 
 	/// Delete as many items from the deletion queue possible within the supplied weight limit.
