@@ -129,6 +129,8 @@ impl TransactionsHandlerPrototype {
 		} else {
 			format!("/{}/transactions/1", array_bytes::bytes2hex("", genesis_hash))
 		};
+
+		println!("{}", protocol_name);
 		let legacy_protocol_name = format!("/{}/transactions/1", protocol_id.as_ref());
 
 		Self {
@@ -453,6 +455,7 @@ where
 					propagated_to.entry(hash).or_default().push(who.to_base58());
 				}
 				trace!(target: "sync", "Sending {} transactions to {}", to_send.len(), who);
+				println!("{:?} {:?}", to_send, self.protocol_name);
 				self.service
 					.write_notification(*who, self.protocol_name.clone(), to_send.encode());
 			}
