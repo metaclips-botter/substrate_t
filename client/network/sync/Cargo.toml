@@ -24,7 +24,7 @@ libp2p = "0.50.0"
 log = "0.4.17"
 lru = "0.8.1"
 mockall = "0.11.3"
-prost = "0.11"
+prost = "0.12"
 smallvec = "1.8.0"
 thiserror = "1.0"
 fork-tree = { version = "3.0.0", path = "../../../utils/fork-tree" }

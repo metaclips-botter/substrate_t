@@ -20,7 +20,7 @@ cid = "0.8.6"
 futures = "0.3.21"
 libp2p = "0.50.0"
 log = "0.4.17"
-prost = "0.11"
+prost = "0.12"
 thiserror = "1.0"
 unsigned-varint = { version = "0.7.1", features = ["futures", "asynchronous_codec"] }
 sc-client-api = { version = "4.0.0-dev", path = "../../api" }
